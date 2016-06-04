@@ -34,11 +34,16 @@ public class KitGetCommand implements CommandExecutor {
 
 				ArrayList<String> kitList = new ArrayList<String>(Arrays.asList(config.getNode("1 - kitlist").getString().split(", ")));
 
+
 				if (kitList.contains(kit)) {
 					for (Object key : config.getNode("2 - kits", kit).getChildrenMap().keySet()) {
-						ItemStack stack = ItemStack.builder().fromContainer(ConfigurateTranslator.instance().translateFrom(config.getNode("2 - kits", kit, key))).build();
+						ItemStack stack;
+
+						stack = ItemStack.builder().fromContainer(ConfigurateTranslator.instance().translateFrom(config.getNode("2 - kits", kit, key))).build();
+
 						player.getInventory().offer(stack);
 					}
+					player.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(Messages.kitPrefix + Messages.kitReceived + kit));
 				} else {
 					src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(Messages.kitPrefix + Messages.kitNotExist));
 				}

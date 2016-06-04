@@ -14,9 +14,13 @@ import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.DefaultConfig;
+import org.spongepowered.api.data.DataContainer;
+import org.spongepowered.api.data.DataQuery;
+import org.spongepowered.api.data.MemoryDataContainer;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameLoadCompleteEvent;
+import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.scheduler.Scheduler;
 import org.spongepowered.api.scheduler.Task;
@@ -96,6 +100,15 @@ public class KitTools {
 				.description(Text.of("Reloads config"))
 				.extendedDescription(Text.of("/kit reload"))
 				.executor(new ReloadCommand())
+				.build());
+
+		subcommands.put(Arrays.asList("give"), CommandSpec.builder()
+				.description(Text.of("Gives the specified kit to the specified player"))
+				.extendedDescription(Text.of("Gives the specified kit to the specified player"))
+				.arguments(
+						GenericArguments.onlyOne(GenericArguments.string(Text.of("kit"))),
+						GenericArguments.onlyOne(GenericArguments.player(Text.of("targetPlayer"))))
+				.executor(new KitGiveCommand())
 				.build());
 
 		subcommands.put(Arrays.asList("help"), CommandSpec.builder()

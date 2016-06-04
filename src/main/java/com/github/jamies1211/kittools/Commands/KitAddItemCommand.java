@@ -9,12 +9,16 @@ import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.data.DataContainer;
+import org.spongepowered.api.data.MemoryDataContainer;
 import org.spongepowered.api.data.translator.ConfigurateTranslator;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
 import java.util.*;
+
+import static co.aikar.timings.Timings.of;
 
 /**
  * Created by Jamie on 02-Jun-16.
@@ -39,11 +43,8 @@ public class KitAddItemCommand implements CommandExecutor {
 
 				ItemStack stack = player.getItemInHand().get();
 				ConfigurateTranslator.instance().translateContainerToData(config.getNode("2 - kits", kit, "item" + (currentSize + 1)), stack.toContainer());
-
-				if (stack.getItem().getName().equalsIgnoreCase("minecraft:written_book")) {
-
-				}
 				KitTools.plugin.save();
+				src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(Messages.kitPrefix + Messages.kitItemAdded + " " + stack.getItem().getName() + " to kit " + kit));
 			} else {
 				src.sendMessage(TextSerializers.FORMATTING_CODE.deserialize(Messages.kitPrefix + Messages.kitNotExist));
 			}

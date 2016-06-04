@@ -19,4 +19,7 @@ public class Messages {
 	public static final String kitAlreadyExists = "This kit already exists so you can't create it";
 	public static final String kitCreated = "You have created a new kit with the name: ";
 	public static final String kitNotExist = "This kit does not exist";
+	public static final String kitItemAdded = "You have added";
+	public static final String kitReceived = "You have just received kit:";
+	public static final String kitGiven = "You have just given kit:";
 }
