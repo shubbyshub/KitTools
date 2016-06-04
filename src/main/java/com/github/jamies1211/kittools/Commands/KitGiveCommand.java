@@ -15,6 +15,8 @@ import org.spongepowered.api.text.serializer.TextSerializers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Jamie on 02-Jun-16.
@@ -32,7 +34,8 @@ public class KitGiveCommand implements CommandExecutor {
 
 
 		if (kitList.contains(kit)) {
-			for (Object key : config.getNode("2 - kits", kit).getChildrenMap().keySet()) {
+			Set<Object> listOfItems = new TreeSet<>(config.getNode("2 - kits", kit).getChildrenMap().keySet());
+			for (Object key : listOfItems) {
 				ItemStack stack;
 
 				stack = ItemStack.builder().fromContainer(ConfigurateTranslator.instance().translateFrom(config.getNode("2 - kits", kit, key))).build();
